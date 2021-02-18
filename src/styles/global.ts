@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #f1f1f1;
   }
 
-  body, input, button, span {
+  body, input, button, span, a {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: #919191;
@@ -21,8 +21,34 @@ const GlobalStyle = createGlobalStyle`
     color: #404040
   }
 
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
   button {
     cursor: pointer;
+    border: 0;
+  }
+
+  input {
+    color: #404040;
+
+    ::-webkit-input-placeholder { 
+      color: #a3a3a3;
+    }
+    ::-moz-placeholder { 
+      color: #a3a3a3;
+    }
+    :-ms-input-placeholder { 
+      color: #a3a3a3;
+    }
+    :-moz-placeholder {
+      color: #a3a3a3;
+    }
   }
 `;
 

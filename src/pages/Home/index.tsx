@@ -9,8 +9,8 @@ import {
 
 import {
   PageContainer,
-  Title,
-  SearchInput,
+  PageTitleContainer,
+  SearchInputContainer,
   MoviesContainer,
   NavigationFooter,
   NavigationBack,
@@ -113,17 +113,24 @@ const Home: React.FC = () => {
 
   return (
     <PageContainer>
-      <Title>Movie Finder</Title>
+      <PageTitleContainer>
+        <h1>Movie Finder</h1>
+        <span>Data source: The Movie DB API</span>
+        <span>Developer: Leonardo Ribeiro</span>
+      </PageTitleContainer>
 
-      <SearchInput
-        onChange={onChangeSearchInput}
-        placeholder="Type the movie name"
-      />
+      <SearchInputContainer>
+        <input
+          onChange={onChangeSearchInput}
+          placeholder="Type the movie name here ;)"
+        />
+      </SearchInputContainer>
       <MoviesContainer>
         {movies &&
           movies.map((movie) => {
             return (
               <MovieItem
+                id={movie.id}
                 key={movie.id}
                 title={movie.original_title}
                 sinopsis={movie.overview}
@@ -136,25 +143,30 @@ const Home: React.FC = () => {
             );
           })}
       </MoviesContainer>
-      <NavigationFooter>
-        <NavigationBack>
-          <PageButton onClick={handlePressFirstPage}>
-            <FiChevronsLeft size={35} />
-          </PageButton>
-          <PageButton onClick={handlePressPreviousPage}>
-            <FiChevronLeft size={35} />
-          </PageButton>
-        </NavigationBack>
-        <PageNumber>{`${page} / ${lastPage}`}</PageNumber>
-        <NavigationFoward>
-          <PageButton onClick={handlePressNextPage}>
-            <FiChevronRight size={35} />
-          </PageButton>
-          <PageButton onClick={handlePressLastPage}>
-            <FiChevronsRight size={35} />
-          </PageButton>
-        </NavigationFoward>
-      </NavigationFooter>
+
+      {movies.length > 0 && (
+        <NavigationFooter>
+          <NavigationBack>
+            <PageButton onClick={handlePressFirstPage}>
+              <FiChevronsLeft size={35} />
+            </PageButton>
+            <PageButton onClick={handlePressPreviousPage}>
+              <FiChevronLeft size={35} />
+            </PageButton>
+          </NavigationBack>
+
+          <PageNumber>{`${page} / ${lastPage}`}</PageNumber>
+
+          <NavigationFoward>
+            <PageButton onClick={handlePressNextPage}>
+              <FiChevronRight size={35} />
+            </PageButton>
+            <PageButton onClick={handlePressLastPage}>
+              <FiChevronsRight size={35} />
+            </PageButton>
+          </NavigationFoward>
+        </NavigationFooter>
+      )}
     </PageContainer>
   );
 };

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const MovieItemContainer = styled.div`
+export const MovieItemContainer = styled.a`
   display: flex;
+  text-decoration: none;
   margin-top: 10px;
   padding-bottom: 20px;
   padding-left: 20px;
@@ -10,6 +11,11 @@ export const MovieItemContainer = styled.div`
   max-width: 800px;
   background-color: #ffffff;
   border-radius: 10px;
+  transition: transform(0.2s);
+
+  &:hover {
+    transform: translateX(10px);
+  }
 `;
 
 export const InfoContainer = styled.div`
@@ -23,7 +29,7 @@ export const Poster = styled.img`
   margin-top: 15px;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   margin-top: 5px;
   background-color: #ffffff;
   margin-bottom: 15px;
