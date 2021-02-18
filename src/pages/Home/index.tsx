@@ -31,7 +31,6 @@ interface IMoviePropertiesFromAPI {
 
 const Home: React.FC = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>("");
-  const [temp, setTemp] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [lastPage, setLastPage] = useState<number>(1);
   const [movies, setMovies] = useState<IMoviePropertiesFromAPI[]>([]);
@@ -79,7 +78,6 @@ const Home: React.FC = () => {
           },
         })
         .then((response) => {
-          console.log(response.data);
           setMovies(response.data.results);
           setLastPage(response.data.total_pages);
         })
@@ -93,9 +91,8 @@ const Home: React.FC = () => {
   // Handles Search Input Timer
   useEffect(() => {
     const timeOut = setTimeout(() => {
-      if (temp !== searchInputValue) {
-        setTemp(searchInputValue);
-        apiRequestMovies(searchInputValue, page);
+      if (searchInputValue) {
+        apiRequestMovies(searchInputValue, 1);
       }
     }, 2000);
     return () => {
@@ -105,11 +102,10 @@ const Home: React.FC = () => {
 
   // Handle Page Change
   useEffect(() => {
-    apiRequestMovies(searchInputValue, page);
+    if (searchInputValue) {
+      apiRequestMovies(searchInputValue, page);
+    }
   }, [page]);
-
-  const sinopsisTest =
-    'A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground "fight clubs" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.';
 
   return (
     <PageContainer>
