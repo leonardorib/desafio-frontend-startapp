@@ -11,6 +11,7 @@ import {
   PageContainer,
   Title,
   SearchInput,
+  MoviesContainer,
   NavigationFooter,
   NavigationBack,
   NavigationFoward,
@@ -114,23 +115,27 @@ const Home: React.FC = () => {
     <PageContainer>
       <Title>Movie Finder</Title>
 
-      <SearchInput onChange={onChangeSearchInput} />
-      {movies &&
-        movies.map((movie) => {
-          return (
-            <MovieItem
-              key={movie.id}
-              title={movie.original_title}
-              sinopsis={movie.overview}
-              image_url={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                  : undefined
-              }
-            />
-          );
-        })}
-
+      <SearchInput
+        onChange={onChangeSearchInput}
+        placeholder="Type the movie name"
+      />
+      <MoviesContainer>
+        {movies &&
+          movies.map((movie) => {
+            return (
+              <MovieItem
+                key={movie.id}
+                title={movie.original_title}
+                sinopsis={movie.overview}
+                image_url={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : undefined
+                }
+              />
+            );
+          })}
+      </MoviesContainer>
       <NavigationFooter>
         <NavigationBack>
           <PageButton onClick={handlePressFirstPage}>
