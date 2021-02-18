@@ -73,7 +73,7 @@ const Home: React.FC = () => {
       api
         .get("https://api.themoviedb.org/3/search/movie", {
           params: {
-            api_key: "58e2c281247f8e440e2aa123c99f041f",
+            api_key: `${process.env.REACT_APP_API_KEY}`,
             query: searchInputValue,
             page: page,
           },
