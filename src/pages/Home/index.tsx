@@ -95,14 +95,15 @@ const Home: React.FC = () => {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [searchInputValue]);
+  }, [searchInputValue, apiRequestMovies]);
 
   // Handle Page Change
-
   useEffect(() => {
     if (searchInputValue) {
       apiRequestMovies(searchInputValue, page);
     }
+    // We do not want to trigger the effect everytime the user changes the input. So:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (
