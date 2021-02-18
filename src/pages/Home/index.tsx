@@ -51,7 +51,7 @@ const Home: React.FC = () => {
       setPage(lastPage);
       window.scrollTo(0, 0);
     }
-  }, [lastPage]);
+  }, [page, lastPage]);
 
   const handlePressNextPage = useCallback(() => {
     if (page < lastPage) {
@@ -67,26 +67,23 @@ const Home: React.FC = () => {
     }
   }, [page]);
 
-  const apiRequestMovies = useCallback(
-    (searchInputValue, page) => {
-      api
-        .get("https://api.themoviedb.org/3/search/movie", {
-          params: {
-            api_key: `${process.env.REACT_APP_API_KEY}`,
-            query: searchInputValue,
-            page: page,
-          },
-        })
-        .then((response) => {
-          setMovies(response.data.results);
-          setLastPage(response.data.total_pages);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-    [api]
-  );
+  const apiRequestMovies = useCallback((searchInputValue, page) => {
+    api
+      .get("https://api.themoviedb.org/3/search/movie", {
+        params: {
+          api_key: `${process.env.REACT_APP_API_KEY}`,
+          query: searchInputValue,
+          page: page,
+        },
+      })
+      .then((response) => {
+        setMovies(response.data.results);
+        setLastPage(response.data.total_pages);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   // Handles Search Input Timer
   useEffect(() => {
@@ -101,6 +98,7 @@ const Home: React.FC = () => {
   }, [searchInputValue]);
 
   // Handle Page Change
+
   useEffect(() => {
     if (searchInputValue) {
       apiRequestMovies(searchInputValue, page);
