@@ -90,6 +90,7 @@ const Home: React.FC = () => {
     const timeOut = setTimeout(() => {
       if (searchInputValue) {
         apiRequestMovies(searchInputValue, 1);
+        setPage(1);
       }
     }, 2000);
     return () => {
