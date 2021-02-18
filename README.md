@@ -1,3 +1,7 @@
+# Solução
+
+O problema resolvido pode ser testado localmente ou em: [https://movie-finder-themoviedb.netlify.app/](https://movie-finder-themoviedb.netlify.app/)
+
 # Desafio Dev
 
 ## Problema
