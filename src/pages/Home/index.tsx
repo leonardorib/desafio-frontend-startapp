@@ -68,6 +68,7 @@ const Home: React.FC = () => {
   }, [page]);
 
   const apiRequestMovies = useCallback((searchInputValue, page) => {
+    console.log("test");
     api
       .get("https://api.themoviedb.org/3/search/movie", {
         params: {
@@ -89,23 +90,22 @@ const Home: React.FC = () => {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       if (searchInputValue) {
-        apiRequestMovies(searchInputValue, 1);
-        setPage(1);
+        apiRequestMovies(searchInputValue, page);
       }
-    }, 2000);
+    }, 450);
     return () => {
       clearTimeout(timeOut);
     };
-  }, [searchInputValue, apiRequestMovies]);
+  }, [searchInputValue, page, apiRequestMovies]);
 
   // Handle Page Change
-  useEffect(() => {
-    if (searchInputValue) {
-      apiRequestMovies(searchInputValue, page);
-    }
-    // We do not want to trigger the effect everytime the user changes the input. So:
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  // useEffect(() => {
+  //   if (searchInputValue) {
+  //     apiRequestMovies(searchInputValue, page);
+  //   }
+  //   // We do not want to trigger the effect everytime the user changes the input. So:
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [page]);
 
   return (
     <PageContainer>
